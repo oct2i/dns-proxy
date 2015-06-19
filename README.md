@@ -1,2 +1,0 @@
-# dnsproxy
-dnsproxy
