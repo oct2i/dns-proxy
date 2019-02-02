@@ -3,7 +3,7 @@
   ** dnsproxy.c
   **
   ** About: DNS proxy caching
-  ** Author: vladi <vladi_29_92@mail.ru>
+  ** Author: oct2i <oct2i@yandex.ru>
   ** Data: april/may 2015
   ** This software is licensed under the terms of the GNU GPL version 2.
   **
