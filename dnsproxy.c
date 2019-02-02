@@ -550,7 +550,7 @@ static void hashtab_add_value(struct NODE *node,
 module_init(dnsproxy_start);
 module_exit(dnsproxy_stop);
 
-MODULE_AUTHOR("vladi");
+MODULE_AUTHOR("oct2i");
 MODULE_DESCRIPTION("DNS proxy caching");
 MODULE_LICENSE("GPLv2");
 
