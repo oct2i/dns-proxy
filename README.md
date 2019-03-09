@@ -1,5 +1,5 @@
-# Dns proxy caching
-
+# Сaching Dns proxy
+********************
 Сaching Dns proxy in the form of GNU/Linux kernel module.
 
 Module was written and tested on Ubuntu 12.04.5 Server 32-bit (3.13 kernel), GCC 4.6.3.
@@ -109,7 +109,7 @@ The structure of the DNS packet:
 ```
 
 
-## How works Dns proxy caching
+## How works caching Dns proxy
 
 Scheme of work module:
 ```txt
