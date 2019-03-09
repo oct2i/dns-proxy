@@ -2,7 +2,7 @@
   **
   ** dnsproxy.h
   **
-  ** About: DNS proxy caching
+  ** About: Caching Dns proxy
   ** Author: oct2i <oct2i@yandex.ru>
   ** Data: april/may 2015
   ** This software is licensed under the terms of the GNU GPL version 2.
