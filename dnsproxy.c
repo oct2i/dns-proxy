@@ -2,9 +2,10 @@
   **
   ** dnsproxy.c
   **
-  ** About: DNS proxy caching
+  ** About: Caching Dns proxy
   ** Author: oct2i <oct2i@yandex.ru>
   ** Data: april/may 2015
+  **
   ** This software is licensed under the terms of the GNU GPL version 2.
   **
 */
@@ -22,8 +23,8 @@ static int __init dnsproxy_start(void)
 
 	hashtab_init(hashtab);
 
-	printk(KERN_ALERT "Register dnsproxy.\nHashtable size: %d\n",
-	                                               HASHTAB_SIZE);
+	printk(KERN_ALERT "Register dnsproxy.\nHashtable size: %d\n", HASHTAB_SIZE);
+
 	return 0;
 }
 
@@ -48,10 +49,10 @@ static void __exit dnsproxy_stop(void)
  * Return value: NF_ACCEPT or NF_DROP.
  */
 static unsigned int hook_post(unsigned int hooknum,
-                               struct sk_buff *skb,
-                               const struct net_device *in,
-                               const struct net_device *out,
-                               int (*okfn)(struct sk_buff *))
+                              struct sk_buff *skb,
+                              const struct net_device *in,
+                              const struct net_device *out,
+                              int (*okfn)(struct sk_buff *))
 {
 	struct iphdr     *ip_h;
 	struct udphdr    *udp_h;
@@ -132,6 +133,7 @@ static unsigned int hook_post(unsigned int hooknum,
 			}
 		}
 	}
+
 	return NF_ACCEPT;
 }
 
@@ -143,10 +145,10 @@ static unsigned int hook_post(unsigned int hooknum,
  * Return value: NF_ACCEPT.
  */
 static unsigned int hook_pre(unsigned int hooknum,
-                              struct sk_buff *skb,
-                              const struct net_device *in,
-                              const struct net_device *out,
-                              int (*okfn)(struct sk_buff *))
+                             struct sk_buff *skb,
+                             const struct net_device *in,
+                             const struct net_device *out,
+                             int (*okfn)(struct sk_buff *))
 {
 	struct iphdr     *ip_h;
 	struct udphdr    *udp_h;
@@ -235,6 +237,7 @@ static unsigned int hook_pre(unsigned int hooknum,
 			}
 		}
 	}
+
 	return NF_ACCEPT;
 }
 
@@ -309,10 +312,10 @@ static unsigned int get_datalen_answer(void)
  *
  */
 static void send_reply_dnspacket(struct sk_buff *in_skb,
-                                    unsigned int dst_ip,
-                                    unsigned int dst_port,
-                                    unsigned int src_ip,
-                                    struct NODE *node)
+                                 unsigned int dst_ip,
+                                 unsigned int dst_port,
+                                 unsigned int src_ip,
+                                 struct NODE *node)
 {
 	struct sk_buff   *nskb;
 	struct iphdr     *ip_h;
@@ -400,8 +403,8 @@ static void send_reply_dnspacket(struct sk_buff *in_skb,
 	//UDP HEADER continuation
 	udp_h->check  = 0;
 	udp_h->check  = csum_tcpudp_magic(src_ip, dst_ip,
-	                                 udp_len, IPPROTO_UDP,
-	                                 csum_partial(udp_h, udp_len, 0));
+	                                  udp_len, IPPROTO_UDP,
+	                                  csum_partial(udp_h, udp_len, 0));
 
 	if (ip_route_me_harder(nskb, RTN_UNSPEC)) {
 		printk (KERN_ERR "\nERROR: fail function ip_route_me_harder()\n");
@@ -431,6 +434,7 @@ static unsigned int rs_hash(unsigned char *str, unsigned int len)
 		hash = hash * a + (unsigned char)(*str);
 		a *= b;
 	}
+
 	return (hash % HASHTAB_SIZE);
 }
 
@@ -551,6 +555,6 @@ module_init(dnsproxy_start);
 module_exit(dnsproxy_stop);
 
 MODULE_AUTHOR("oct2i");
-MODULE_DESCRIPTION("DNS proxy caching");
+MODULE_DESCRIPTION("Caching Dns proxy");
 MODULE_LICENSE("GPLv2");
 
